@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-server-deployment
+  labels:
+    component: app-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: app-server
+  template:
+    metadata:
+      labels:
+        component: app-server
+    spec:
+      containers:
+      - name: app-server
+        image: ricardoher96/python-app
+        ports:
+        - containerPort: 5000
+        env:
+          - name: redis
+            value: redis-service
